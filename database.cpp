@@ -13,32 +13,24 @@ using namespace std;
 
 void addStudent(string name,string surname)
 {
-    std::cout << "Added student " << name << surname << std::endl;
+    cout << "Function addStudent() called " << endl;
 }
 void readDatabase(std::string file)
 {
-     std::cout << "Read database" << std::endl;
+     cout << "Function queryDatabase() called " << endl;
 }
 void saveDatabase(std::string file)
 {
-     std::cout << "Saved database" << std::endl;
+     cout << "Function saveDatabase() called " << endl;
 }
 void displayStudent(std::string name,std::string surname)
 {
-    std::cout << "Here's student" << name << surname << std::endl;
+   cout << "Function displayStudent() called " << endl;
 }
 float gradeStudent(std::string name,std::string surname)
 {
-    std::cout << "Here's student" << name << surname << "s grade ... 0" << std::endl;
+    cout << "Function gradeStudent() called " << endl;
     return 0.0;
 }
 }
-int main(void)
-{
-    std::string f;
-    f="hello";
-    std::string l;
-    l="ahoy";
-    addStudent(f,l);
-    return 0;
-}
+
