@@ -1,5 +1,7 @@
 /**
 * database .cpp
+* Author: Alan Berman
+* Date: 23/2/2015
 */
 #include <iostream>
 #include <string>

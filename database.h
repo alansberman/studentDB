@@ -1,15 +1,15 @@
 /**
-* .h file
+* database.h (header file)
+* Author: Alan Berman
+* 23/2/2015
 */
  #ifndef DATABASE_H.h
 #define DATABASE_H.h
 #include <string>
-//using namespace std;
-
 
 
 namespace BRMALA003 {
-using namespace std;
+
 void addStudent(string name,string surname);
 void readDatabase(string file);
 void saveDatabase(string file);
