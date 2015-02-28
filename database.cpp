@@ -21,8 +21,23 @@ void addStudent(string name,string surname, string studentNumber, string classRe
     s.surname = surname;
     s.studentNumber = studentNumber;
     s.classRecord = classRecord;
+    int count=0;
+    //Adapted from http://stackoverflow.com/questions/409348/iteration-over-vector-in-c
+	for (i=v.begin(); i != v.end(); ++i) 
+	{
+				//cout << i->name<<endl;
+				cout << count << endl;
+				//Check if student already in database
+					if (i->studentNumber==s.studentNumber)
+					{
+						cout << "Updating student record..." << endl;
+						v.erase(v.begin()+count);
+						break;	
+					}
+					count++;
+	}
     v.push_back(s);
-
+	cout << name <<" "<<surname<<" ("<<studentNumber<<") with class record " <<classRecord << " added to the database."<<endl;
 }
 //Prints out the database (database.txt's contents)
 void readDatabase()
@@ -31,7 +46,7 @@ void readDatabase()
      string entry;
      ifstream i(databaseFile.c_str());
      if(!i)
-		{ cout << "Couldn't open database. Have you entered students into the database? "  << endl; 
+		{ cout << "Couldn't open database."  << endl; 
 		  return;
 		}
 	cout << "Student Database: " << endl;
@@ -41,10 +56,9 @@ void readDatabase()
 		cout << entry << endl;
 	}
 }
-//Creates a text file (database.txt) containing all the StudentRecords of the vector
+//Creates/updates a text file (database.txt) containing all the StudentRecords of the vector
 void saveDatabase()
 {
-	cout <<"Creating database... ";
 	ofstream outFile;
 	outFile.open("database.txt");
 	outFile << "First Name | Surname | Student Number | Class Record" << endl;
@@ -54,81 +68,69 @@ void saveDatabase()
 				//Adapted from http://stackoverflow.com/questions/409348/iteration-over-vector-in-c
 				for (i=v.begin(); i != v.end(); i++) {
 				{
+					
 					//Add the fields of each vector to the text file
 					outFile << i->name<<", "<<i->surname<<", "<<i->studentNumber<<", "<<i->classRecord << endl;			
 				}
 			}
 }
 	outFile.close();
-	cout << "done!" <<endl;
+	cout << "Done!" <<endl;
 }
 //Retrieves a student's StudentRecord fields (if present in the database text file)
 void displayStudent(std::string studentNumber)
 {
-    string filename = "database.txt";
-	string line;
-	ifstream in(filename.c_str());
-	int position,notfound,foundStudent;
-	notfound=-1;
-	foundStudent=0;
-	if(!in)
-		{ cout << "Couldn't open database "  << endl; }
-	//Search for the student number in the database text file
-	while (!in.eof())
-{
-	getline(in,line);
-	position=line.find(studentNumber,0);
-	//If the student is found
-	if (position!=notfound)
+	int found = 0;
+   for (i=v.begin(); i != v.end(); ++i) 
 	{
-			foundStudent=1;
-			cout <<studentNumber <<": "<< line << endl;
+				
+					if (i->studentNumber==studentNumber)
+					{
+						found=1;
+						cout <<"Student "<<studentNumber<<": "<<i->name<<", "<<i->surname<<", "<<i->studentNumber<<", "<<i->classRecord << endl;
+						break;
+					}
+					
 	}
-}
-	if (foundStudent==0)
+	if (found==0)
 	{
-	cout << studentNumber << " not found in database" << endl;
+		cout <<"Student "<<studentNumber<<" not found in the database."<<endl;
 	}
+	
 }
 //Calculates the average grade of a student
 void gradeStudent(std::string studentNumber)
 {
-	string file = "database.txt";
-	string l;
-	int location;
-	string sub;
-	float average;
-	int a,b,c,d,startOfMarks,flag;
-	flag=0;
-	ifstream ins(file.c_str());
-	int notFound=-1;
-	if(!ins)
-		{ cout << "Couldn't open database " << file << endl; }
-	//Search for the student in the database text file
-	while (!ins.eof())
-{
-	getline(ins,l);
-	location=l.find(studentNumber,0);
+	int a,total,count,average;
+	count = 0;
 	
-	//If the student is found
-	if (location!=notFound)
+	int found = 0;
+   for (i=v.begin(); i != v.end(); ++i) 
 	{
-			flag = 1;
-			//Isolate the grades of the student and make it its own string
-			startOfMarks= l.rfind(", ");
-			sub=l.substr(startOfMarks+2);
-			//Adapted from http://www.cplusplus.com/forum/beginner/38599/
-			stringstream ss(sub);
-			//Extract each mark and place them in a,b,c,d
-			ss >> a >> b >> c >> d; 
-			average = (a+b+c+d)/4;
-			cout << studentNumber <<"'s average grade is "<<average <<"%"<<endl;		
+				
+					if (i->studentNumber==studentNumber)
+					{
+						found=1;
+						//Adapted from http://www.cplusplus.com/forum/beginner/38599/
+						istringstream ss(i->classRecord);
+						//Extract each mark and place them a, then update total
+						while (!ss.eof())
+						{
+						ss >> a; 
+						total+=a;
+						count++;
+						}
+						average = (total)/count;
+						cout << studentNumber <<"'s average grade is "<<average <<"%."<<endl;
+						break;
+					}
+					
 	}
-}
-	if (flag==0)
+	if (found==0)
 	{
-	cout << studentNumber <<"not found in database" << endl;
+		cout <<"Student "<<studentNumber<<" not found in the database."<<endl;
 	}
+	
 }
 }
 

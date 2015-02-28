@@ -15,7 +15,7 @@
 	int main(void)
 	{
 	char choice = 'c';
-	//Flag to ensure database.txt not created more than once
+	//Flag to indicate if user is updating database.txt
 	int created = 0;
 	cout << "--------Student Database Menu--------"<<endl;
 	while (true)
@@ -23,11 +23,12 @@
 		//Exit the menu if the user has chosen to quit
 		if (choice=='q' || choice=='Q' )
 		{
-			break;
+			cout << "Bye!"<<endl;
+			return(0);
 		}
 		cout << "0: Add student" <<endl;
-		cout << "1: View database" <<endl;
-		cout << "2: Create the database text file" <<endl;
+		cout << "1: View database text file" <<endl;
+		cout << "2: Create/update the database text file" <<endl;
 		cout << "3: Display student data" <<endl;
 		cout << "4: Grade student" <<endl;
 		cout << "q: Quit" <<endl;
@@ -38,7 +39,6 @@
 			//Enter a student (and add his/her StudentRecord to the vector of StudentRecords)
 			case '0':
 			{
-			cout << "Remember: Add all students BEFORE creating the database text file!" <<endl;
             string f,s,n,r;
             cout << "Enter student's first name:" <<endl;
             cin >> f;
@@ -46,11 +46,11 @@
             cin >> s;
             cout << "Enter student number in uppercase:" <<endl;
             cin >> n;
-            cout << "Enter student's 4 class marks (separated by spaces):" <<endl;
+            cout << "Enter student's class marks (separated by spaces):" <<endl;
             cin.ignore(); //Adapted from http://stackoverflow.com/questions/12691316/getline-does-not-work-if-used-after-some-inputs
 			getline(cin,r);	
             BRMALA003::addStudent(f,s,n,r);
-            cout << f <<" "<<s<<" ("<<n<<") with class record " <<r << " added to the database"<<endl;
+
 			}
 			break;
 			//View the database (the contents of database.txt)
@@ -59,12 +59,13 @@
 			BRMALA003::readDatabase();
 			}
 			break;
-			//Create database.txt (using the contents of the vector of StudentRecords)
+			//Create/update database.txt (using the contents of the vector of StudentRecords)
 			case '2':
 			{
 			if (created==1)
 			{
-				cout << "You already created the database!" << endl;
+				cout << "Updating database text file..." << endl;
+				BRMALA003::saveDatabase();
 				break;
 			}
 			BRMALA003::saveDatabase();
@@ -93,7 +94,7 @@
 			case 'q':
 			break;
 
-			case 'Q':
+			case 'Q':	
 			break;
 
 		}
