@@ -3,20 +3,18 @@
 * Author: Alan Berman
 * 23/2/2015
 */
- #ifndef DATABASE_H
+#ifndef DATABASE_H
 #define DATABASE_H
 #include <string>
-//using namespace std;
-
-
-
+//Header file with declarations of the functions of the database menu
 namespace BRMALA003 {
 using namespace std;
 void addStudent(string name,string surname, string studentNumber, string classRecord);
-void readDatabase(string file);
-void saveDatabase(string file);
-void displayStudent(string name,string surname);
-float gradeStudent(string name, string surname);
+void readDatabase();
+void saveDatabase();
+void displayStudent(string studentNumber);
+void gradeStudent(string studentNumber);
+//The student record struct, instances of which are placed in a vector
 struct StudentRecord
 {
  string name;
