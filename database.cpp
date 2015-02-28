@@ -1,7 +1,5 @@
 /**
 * database .cpp
-* Author: Alan Berman
-* Date: 23/2/2015
 */
 #include <iostream>
 #include <string>
@@ -13,9 +11,15 @@ namespace BRMALA003
 {
 using namespace std;
 
-void addStudent(string name,string surname)
+void addStudent(string name,string surname, string studentNumber, string classRecord)
 {
-    cout << "Function addStudent() called " << endl;
+    StudentRecord s;
+    s.name = name;
+    s.surname = surname;
+    s.studentNumber = studentNumber;
+    s.classRecord = classRecord;
+
+
 }
 void readDatabase(std::string file)
 {
@@ -25,7 +29,7 @@ void saveDatabase(std::string file)
 {
      cout << "Function saveDatabase() called " << endl;
 }
-void displayStudent(std::string name,std::string surname)
+void displayStudent(std::string studentNumber)
 {
    cout << "Function displayStudent() called " << endl;
 }

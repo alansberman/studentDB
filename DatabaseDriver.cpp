@@ -7,12 +7,11 @@
 #include "database.h"
 #include "vector.h"
 #include <vector>
-
 	using namespace std;
 	int main(void)
 	{
-	
-	char choice = 'c';	
+
+	char choice = 'c';
 	while (true)
 	{
 		if (choice=='q' || choice=='Q' )
@@ -31,54 +30,70 @@
 		{
 			case '0':
 			{
-			string g ="hello";
-			string e="ahoy";		
-			addStudent(g,e);
+            string f,s,n,r;
+            vector<string> grades;
+            //std::istringstream is;
+            cout << "Enter student's first name" <<endl;
+            cin >> f;
+            cout << "Enter student's surname" <<endl;
+            cin >> s;
+            cout << "Enter student's student number" <<endl;
+            cin >> n;
+            cout << "Enter student's class records (marks separated by spaces" <<endl;
+           //while (!cin.eof())
+            //{
+             //cin >> r >> ws;
+	    getline (cin,r);	
+             grades.push_back(r);
+            //}
+            BRMALA003::addStudent(f,s,n,r);
+            cout << f <<" "<<s<<" ("<<n<<") with class record " <<r << " added to the database"<<endl;
+
 			}
 			break;
-			
+
 			case '1':
 			{
 			string a ="hello";
-			
-			readDatabase(a);
+
+			 BRMALA003::readDatabase(a);
 			}
 			break;
-			
+
 			case '2':
 			{
 			string c="hello";
-			saveDatabase(c);
+			 BRMALA003::saveDatabase(c);
 			}
 			break;
-			
+
 			case '3':
 			{
 			string d="hello";
-			
+
 			string f="ahoy";
-			displayStudent(f,d);
+			 BRMALA003::displayStudent(f);
 			}
 			break;
-			
+
 			case '4':
 			{
 			string h="hello";
 			string i="ahoy";
-			gradeStudent(h,i);
+			 BRMALA003::gradeStudent(h,i);
 			}
 			break;
-			
+
 			case 'q':
 			break;
-			
+
 			case 'Q':
 			break;
-			
+
 		}
-	}	
-	
-    
+	}
+
+
     return 0;
 	}
 
